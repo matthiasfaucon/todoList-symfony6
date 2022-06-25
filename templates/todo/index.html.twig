@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleTodos.css">
+    
+    <title>Votre TodoList</title>
+</head>
+<body>
+    <h1>Votre TodoList</h1>
+
+    <ul class='todoContainer'>
+     {% for name,content in app.session.get('todos') %}
+        <li class="uneTodo">
+            <p>{{ name }} : {{ content }}</p>
+        </li>
+
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
