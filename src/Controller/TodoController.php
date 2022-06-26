@@ -126,4 +126,12 @@ class TodoController extends AbstractController
         }
         return $this->redirectToRoute('app_todo');
     }
+
+    #[Route('/todo/reset', name: 'todo.reset')]
+    public function resetTodo(Request $request): RedirectResponse
+{
+        $session = $request->getSession();
+        $session->remove('todos');
+        return $this->redirectToRoute('app_todo');
+    }
 }
