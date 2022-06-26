@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,13 +28,11 @@ class TodoController extends AbstractController
     else{
         $todos = $session->get('todos');
     }
-        
-     
         return $this->render('todo/index.html.twig');
     }
 
     #[Route('/todo/add/{name}/{content}', name: 'todo.add')]
-    public function addTodo(Request $request, $name, $content)
+    public function addTodo(Request $request, $name, $content): RedirectResponse
     {
         $session = $request->getSession();
 
@@ -52,6 +51,38 @@ class TodoController extends AbstractController
                         $todos[$name] = $content;
                         //message Flash
                         $this->addFlash('success', 'Ajout de la todo réussi' );
+                        $session->set('todos', $todos);
+                }
+        }
+        //sinon
+        else{
+            // affiche erreur et renvoie vers le controlleur index
+            $this->addFlash('error', 'Aucune liste de todos dans la session existante' );
+            // return $this->redirectToRoute('app_first');
+        }
+        return $this->redirectToRoute('app_todo');
+    }
+
+    #[Route('/todo/update/{name}/{content}', name: 'todo.update')]
+    public function updateTodo(Request $request, $name, $content): RedirectResponse
+    {
+        $session = $request->getSession();
+
+        // Vérifier si il y a le tableau de todos dans la session
+        // si oui
+        if($session->has('todos')) {
+            $todos = $session->get('todos');
+            // Vérifier s'il y a une todo avec le même nom
+                if (!isset($todos[$name])){
+                    //si oui
+                        // afficher erreur
+                        $this->addFlash('errorExist', "la todo: $name n'existe pas dans le tableau todos" );
+                } else{
+                    //si non
+                        // ajouter la todo dans le tableau et message de succès 
+                        $todos[$name] = $content;
+                        //message Flash
+                        $this->addFlash('success', 'la todo a été modifiée avec succès' );
                         $session->set('todos', $todos);
                 }
         }
