@@ -94,4 +94,36 @@ class TodoController extends AbstractController
         }
         return $this->redirectToRoute('app_todo');
     }
+
+    #[Route('/todo/delete/{name}', name: 'todo.delete')]
+    public function deleteTodo(Request $request, $name): RedirectResponse
+    {
+        $session = $request->getSession();
+
+        // Vérifier si il y a le tableau de todos dans la session
+        // si oui
+        if($session->has('todos')) {
+            $todos = $session->get('todos');
+            // Vérifier s'il y a une todo avec le même nom
+                if (!isset($todos[$name])){
+                    //si oui
+                        // afficher erreur
+                        $this->addFlash('errorExist', "la todo: $name n'existe pas dans le tableau todos" );
+                } else{
+                    //si non
+                        // supprime la todo dans le tableau et message de succès 
+                        unset($todos[$name]);
+                        //message Flash
+                        $this->addFlash('success', 'la todo a été modifiée avec succès' );
+                        $session->set('todos', $todos);
+                }
+        }
+        //sinon
+        else{
+            // affiche erreur et renvoie vers le controlleur index
+            $this->addFlash('error', 'Aucune liste de todos dans la session existante' );
+            // return $this->redirectToRoute('app_first');
+        }
+        return $this->redirectToRoute('app_todo');
+    }
 }
