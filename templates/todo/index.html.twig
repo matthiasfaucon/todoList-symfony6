@@ -9,6 +9,30 @@
     <title>Votre TodoList</title>
 </head>
 <body>
+    {% for message in app.session.flashbag.get('info') %}
+        <div class="info">
+        <p>info: {{ message }}</p>
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashbag.get('success') %}
+        <div class="success">
+        <p>success: {{ message }}</p>
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashbag.get('errorExist') %}
+        <div class="errorExist">
+        <p>errorExist: {{ message }}</p>
+        </div>
+    {% endfor %}
+
+      {% for message in app.session.flashbag.get('error') %}
+        <div class="error">
+        <p>error: {{ message }}</p>
+        </div>
+    {% endfor %}
+
     <h1>Votre TodoList</h1>
 
     <ul class='todoContainer'>
