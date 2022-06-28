@@ -36,7 +36,7 @@
     <h1>Votre TodoList</h1>
 
     <ul class='todoContainer'>
-     {% for name,content in app.session.get('todos') %}
+     {% for name,content,isChecked in app.session.get('todos') %}
         <li class="uneTodo">
             <p>{{ name }} : {{ content }}</p>
         </li>

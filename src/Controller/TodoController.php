@@ -33,9 +33,9 @@ class TodoController extends AbstractController
         return $this->render('todo/index.html.twig');
     }
 
-    #[Route("/add/{name<[a-z]+\s*>?nom de la todo}/{content<[a-z]+\s*>?vide}", 
+    #[Route("/add/{name<\w+\s*>?nom de la todo}/{content<\w+\s*>?vide}", 
     name: 'todo.add',
-    // defaults: ['content' => 'vide', 'name' => 'nom de la todo'] //on ne peut pas mettre name par defaut uniquement car une url se lis de droite à gauche.De plus, symfony ne sait pas où mettre la valeur par défaut (donc erreur). 
+    
     )]
     public function addTodo(Request $request, $name, $content): RedirectResponse
     {
