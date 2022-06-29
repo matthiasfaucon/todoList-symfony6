@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La liste des todos</title>
+</head>
+<body>
+
+<div class="todoAdded">
+    <h1>Ajout d'une todo</h1>
+        {# {{ dump(todo) }} #}
+    <ul>
+        <li class="uneTodo">
+            <p class="todoName"> {{ todo.todoName }} </p>
+            <p class="todoContent"> {{ todo.todoContent }} </p>
+        </li>
+    </ul>
+</div>
+    
+</body>
+</html>

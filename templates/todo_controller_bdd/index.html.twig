@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="todos">
+    <h1>Liste des todos</h1>
+        {{ dump(todos) }}
+    <ul>
+    {% for todo in todos %}
+        <li class="uneTodo">
+            <p class="todoName" id="isCheckedTodo"> {{ todo.todoName }} </p>
+            <p class="todoContent" id="isCheckedTodo"> {{ todo.todoContent }} </p>
+            <a href="{{ path('todo.detail', {id: todo.id }) }}" class="detailTodo" ">Detail</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+    
+</body>
+</html>

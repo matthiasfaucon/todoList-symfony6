@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/todo')] // préfixe par défaut, chaque route maintenant aura comme préfixe "/todo" et il sera concaténé avec la route des autres méthodes
+#[Route('/todoTest')] // préfixe par défaut, chaque route maintenant aura comme préfixe "/todo" et il sera concaténé avec la route des autres méthodes
 
 class TodoController extends AbstractController
 {
