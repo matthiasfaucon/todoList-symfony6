@@ -2,32 +2,6 @@
     
     {% block corpsDuDocument %}
 
-    {% for message in app.session.flashbag.get('info') %}
-        <div class="info">
-        <p>info: {{ message }}</p>
-        </div>
-    {% endfor %}
-
-    {% for message in app.session.flashbag.get('success') %}
-        <div class="success">
-        <p>success: {{ message }}</p>
-        </div>
-    {% endfor %}
-
-    {% for message in app.session.flashbag.get('errorExist') %}
-        <div class="errorExist">
-        <p>errorExist: {{ message }}</p>
-        </div>
-    {% endfor %}
-
-    {% for message in app.session.flashbag.get('error') %}
-        <div class="error">
-        <p>error: {{ message }}</p>
-        </div>
-    {% endfor %}
-
-
-    
     {{parent()}}
      {% for name,isChecked in app.session.get('todos') %}
         <li class="uneTodo">
@@ -44,7 +18,7 @@
         {{ form_start(formPassed) }}
         {# {{ form_label(formPassed.todoName, 'la todo', {'label_attr': {'class': 'foo'}}) }} #}
         {{ form_row(formPassed.todoName, {'label': 'Votre todo', 'label_attr': {'class': 'labelTodoName'}, 'row_attr': {'class': 'blockText '}}) }}
-        {{ form_row(formPassed.ajouter, {'row_attr': {'class': 'addTodo'}}) }}
+        {{ form_row(formPassed.ajouter, {'row_attr': {'class': 'addTodo',}}) }}
         {{ form_end(formPassed) }}
         {# <input type="text" placeholder="Ajouter une nouvelle todo ?" name="newTodo" value="newTodo" v-model="newTodo" id="newTodo">
             <button class="addTodo" >
@@ -69,5 +43,30 @@
     {% endfor %}
     </ul>
     </div>
+    </div>
+
+    {% for message in app.session.flashbag.get('info') %}
+        <div class="info">
+        <p>info: {{ message }}</p>
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashbag.get('success') %}
+        <div class="success">
+        <p>success: {{ message }}</p>
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashbag.get('errorExist') %}
+        <div class="errorExist">
+        <p>errorExist: {{ message }}</p>
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashbag.get('error') %}
+        <div class="error">
+        <p>error: {{ message }}</p>
+        </div>
+    {% endfor %}
 {% endblock %}
 

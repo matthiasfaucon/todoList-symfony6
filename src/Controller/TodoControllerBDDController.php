@@ -20,10 +20,21 @@ class TodoControllerBDDController extends AbstractController
     public function displayTodo(ManagerRegistry $doctrine, Request $request): Response
     {
         $todo = new Todos(); //initialisation d'un constructeur 
-        $form = $this->createForm(TodoType::class, $todo);
         $repository = $doctrine->getRepository(Todos::class);
         $todos = $repository->findAll();
 
+        $form = $this->createForm(TodoType::class, $todo);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+            $entiteManager = $doctrine->getManager();
+            $todo->setIsCheckedTodo(false);
+            $entiteManager->persist($todo);
+            
+            $entiteManager->flush();
+            return $this->redirectToRoute('todo.list');
+        }
+        
         return $this->render('todo_controller_bdd/index.html.twig', [
             'todos' => $todos,
             'formPassed'=> $form->createView()
@@ -45,29 +56,6 @@ class TodoControllerBDDController extends AbstractController
         return $this->render('todo_controller_bdd/detail.html.twig', [
             'todo' => $todo,
         ]);
-    }
-
-    #[Route('/add/{name}', name: 'todo.add')]
-    public function addTodo(ManagerRegistry $doctrine, Request $request, $name): Response
-    {
-        $entiteManager = $doctrine->getManager();
-
-        $todo = new Todos(); //initialisation d'un constructeur 
-
-        // on ajoute avec les méthodes qui sont créés lors de la création d'une entité
-        $todo->setTodoName($name);
-        $todo->setIsCheckedTodo(false);  
-
-        // ajoute l'opération d'insertion de la todo dans la transaction
-        $entiteManager->persist($todo);
-
-        $form->handleRequest($request);
-
-        $entiteManager->flush();
-        return $this->redirectToRoute('todo.list', [
-            'todo'=> $todo,
-            
-        ]); 
     }
 
     #[Route('/delete/{id}', name: 'todo.delete')]

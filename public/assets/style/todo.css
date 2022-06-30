@@ -10,11 +10,15 @@ margin: 0;
 body{
     background: #010832;
     display: flex;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
     align-items: center;
     justify-content: center;
-    font-family: 'Quicksand', sans-serif;   
+    font-family: 'Quicksand', sans-serif;
+    color: white;  
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .sectiontodo{
@@ -33,7 +37,7 @@ body{
     width: 100%;
     padding: 3%;
     border-radius: 5px;
-    box-shadow: 9px 6px 30px rgb(255 255 255 / 10%)
+    box-shadow: 9px 6px 30px rgb(255 255 255 / 10%);
 }
 
 .todos{
@@ -97,7 +101,7 @@ body{
     margin-left: 10%;
     font-size: 100%;
     outline: none;
-    background: #8E49E8;
+    background: #010832;
     cursor: pointer;
     border-radius: 3px;
     opacity: 0.8;
@@ -147,4 +151,102 @@ form[name="todo"]{
     align-items: center;
     justify-content: space-evenly;
     margin-right: 5%;
+}
+
+.error, .errorExist, .success, .info{
+   
+    max-width: 30%;
+    max-height: 30%;
+    width: 100%;
+    padding: 2% 3% 2% 3%;
+    border-radius: 5px;
+    margin-top: 2%;
+    font-size: 100%;
+}
+
+.error {
+    background-color: #B80C09;
+}
+
+.success {
+    background-color: #0DAB76;
+}
+
+.contenuTodo{
+    margin-top: 3%;
+}
+
+.contenuTodo p:first-of-type{
+    margin-bottom: 2%;
+}
+
+.retour{
+    width: 3rem;
+    display: flex;
+    height: 3rem;
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    border: solid 0.3vw white;
+    border-radius: 50%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.retour svg{
+    width: 75%;
+    fill: white;
+}
+
+@media all and (max-width: 1250px) {
+    body{
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .containerTodos{
+        max-width: 35%;
+    }
+
+    .todos h1{
+        font-size: 27px;
+        font-weight: 600;   
+    }
+}
+
+@media all and (max-width: 850px) {
+
+    .containerTodos{
+        max-width: 55%;
+    }
+
+    form[name="todo"]{
+        height: 3rem;
+    }
+
+    .blockText{
+        width: 70%;
+    }
+
+    .uneTodo{
+        grid-template-columns: 75% 25%;
+    }
+
+    .todos h1{
+        font-size: 25px;
+        font-weight: 600;   
+    }
+}
+
+@media all and (max-width: 600px) {
+
+    .containerTodos{
+        max-width: 75%;
+    }
+
+    .todos h1{
+        font-size: 25px;
+        font-weight: 600;   
+    }
 }
