@@ -32,6 +32,7 @@ class TodoControllerBDDController extends AbstractController
             $entiteManager->persist($todo);
             
             $entiteManager->flush();
+            $this->addFlash('success', 'La todo a été ajoutée avec succès');
             return $this->redirectToRoute('todo.list');
         }
         

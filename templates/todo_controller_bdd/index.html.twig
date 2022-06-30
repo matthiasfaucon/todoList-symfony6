@@ -28,7 +28,7 @@
     <ul>
     {% for todo in todos %}
         <li class="uneTodo {% if loop.index is odd %}impair{% else %}pair{% endif %}">
-            <p class="todoName" id="isCheckedTodo"> {{ "#{todo.todoName} " }} </p>
+            <p class="todoName"> {{ "#{todo.todoName}" }} </p>
 
             <div class="actionsTodo">
                 <a href="{{ path('todo.detail', {id: todo.id }) }}" class="detailTodo">
