@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Todos;
+use App\Form\TodoType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,12 +17,16 @@ class TodoControllerBDDController extends AbstractController
 {
 
     #[Route('/', name: 'todo.list')]
-    public function displayTodo(ManagerRegistry $doctrine): Response
+    public function displayTodo(ManagerRegistry $doctrine, Request $request): Response
     {
+        $todo = new Todos(); //initialisation d'un constructeur 
+        $form = $this->createForm(TodoType::class, $todo);
         $repository = $doctrine->getRepository(Todos::class);
         $todos = $repository->findAll();
+
         return $this->render('todo_controller_bdd/index.html.twig', [
             'todos' => $todos,
+            'formPassed'=> $form->createView()
         ]);
     }
 
@@ -42,20 +48,25 @@ class TodoControllerBDDController extends AbstractController
     }
 
     #[Route('/add/{name}', name: 'todo.add')]
-    public function addTodo(ManagerRegistry $doctrine, $name): Response
+    public function addTodo(ManagerRegistry $doctrine, Request $request, $name): Response
     {
         $entiteManager = $doctrine->getManager();
+
         $todo = new Todos(); //initialisation d'un constructeur 
+
         // on ajoute avec les méthodes qui sont créés lors de la création d'une entité
         $todo->setTodoName($name);
-        $todo->setIsCheckedTodo(false);   
+        $todo->setIsCheckedTodo(false);  
 
         // ajoute l'opération d'insertion de la todo dans la transaction
         $entiteManager->persist($todo);
 
+        $form->handleRequest($request);
+
         $entiteManager->flush();
         return $this->redirectToRoute('todo.list', [
-            'todo'=> $todo
+            'todo'=> $todo,
+            
         ]); 
     }
 

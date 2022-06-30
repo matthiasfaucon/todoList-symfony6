@@ -45,20 +45,31 @@ body{
 .todos h1{
     font-size: 30px;
     font-weight: 600; 
+    
 }
-.uneTodoPair{
+
+.uneTodo{
     display: flex;
-    padding: 1rem 0 1rem 2%;
+    align-items: center;
+    padding: 0.7rem 0 0.7rem 2%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 80% 20%;
 }
 
-.uneTodoImpair{
-    display: flex;   
+.uneTodo.impair{
     background: #172ead96;
-    padding: 1rem 0 1rem 1%;
 }
 
-#newTodo{
-    width: 85%;
+.blockText{
+    height: 75%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.blockText input{
+    max-width: 100%;
     height: 100%;
     outline: none;
     border-radius: 3px;
@@ -68,13 +79,23 @@ body{
     transition: all 0.3s ease;
 }
 
+.blockText label{
+ display: none;
+}
+
 .addTodo{
-    width: 50px;
+    height: 75%;
+    width: 20%;
+}
+
+.addTodo button{
+    width: max-content;
+    padding: 10%;
     height: 100%;
     border: none;
     color: #fff;
-    margin-left: 5px;
-    font-size: 21px;
+    margin-left: 10%;
+    font-size: 100%;
     outline: none;
     background: #8E49E8;
     cursor: pointer;
@@ -101,10 +122,29 @@ body{
     margin-right: 0.1rem;   
 }
 
-.addBarre{
-    margin: 20px 0;
+form[name="todo"]{
+    margin: 1rem 0;
     width: 100%;
     display: flex;
-    height: 45px;
+    height: 4rem;
     align-items: center;
+}
+
+.deleteTodo svg, .detailTodo svg{
+    width: 50%;
+    fill: #F7F7FF;
+}
+
+.deleteTodo svg:hover{
+    fill: #B80C09;
+}
+
+.detailTodo svg:hover{
+    fill: #FAA916;
+}
+.actionsTodo{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 5%;
 }
