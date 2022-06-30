@@ -1,0 +1,14 @@
+
+{% extends 'heritage.html.twig' %} {# on réléchis à partir du dossier template #}
+
+{% block titreDuDocument %}
+Nouveau titre
+{% endblock %}
+
+{% block corpsDuDocument %}
+
+{% include "fragments/date_jour.html.twig" %}
+{{ parent() }} {# Récupéré le contenu du block parent #}
+<p>Vive l'héritage dans Twig</p>
+{% endblock %}
+

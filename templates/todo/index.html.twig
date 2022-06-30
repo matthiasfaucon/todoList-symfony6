@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {# <link rel="stylesheet" href="styleTodos.css"> #}
-    
-    <title>Votre TodoList</title>
-</head>
-<body>
+{% extends "template.html.twig" %}
     {% for message in app.session.flashbag.get('info') %}
         <div class="info">
         <p>info: {{ message }}</p>
@@ -27,13 +17,15 @@
         </div>
     {% endfor %}
 
-      {% for message in app.session.flashbag.get('error') %}
+    {% for message in app.session.flashbag.get('error') %}
         <div class="error">
         <p>error: {{ message }}</p>
         </div>
     {% endfor %}
 
-    <h1>Votre TodoList</h1>
+    {% block corpsDuDocument %}
+      <h1>Votre TodoList</h1>
+
 
     <ul class='todoContainer'>
      {% for name,content,isChecked in app.session.get('todos') %}
@@ -42,7 +34,6 @@
         </li>
 
         {% endfor %}
-    </ul>
-
-</body>
-</html>
+    </ul> 
+    </div>
+    {% endblock %}

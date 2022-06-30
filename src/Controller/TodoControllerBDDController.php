@@ -41,26 +41,25 @@ class TodoControllerBDDController extends AbstractController
         ]);
     }
 
-    #[Route('/add', name: 'todo.add')]
-    public function addTodo(ManagerRegistry $doctrine): Response
+    #[Route('/add/{name}', name: 'todo.add')]
+    public function addTodo(ManagerRegistry $doctrine, $name): Response
     {
         $entiteManager = $doctrine->getManager();
         $todo = new Todos(); //initialisation d'un constructeur 
         // on ajoute avec les méthodes qui sont créés lors de la création d'une entité
-        $todo->setTodoName('devoir');
-        $todo->setTodoContent('Apprendre symfony');
+        $todo->setTodoName($name);
         $todo->setIsCheckedTodo(false);   
 
-        // ajoute l'opération d'insertion de la personne dans la transaction
+        // ajoute l'opération d'insertion de la todo dans la transaction
         $entiteManager->persist($todo);
 
         $entiteManager->flush();
-        return $this->render('todo_controller_bdd/addTodo.html.twig', [
-            'todo' => $todo,
-        ]);
+        return $this->redirectToRoute('todo.list', [
+            'todo'=> $todo
+        ]); 
     }
 
-    #[Route('/delete/{name}', name: 'todo.delete')]
+    #[Route('/delete/{id}', name: 'todo.delete')]
     public function deleteTodo(Todos $todo = null, ManagerRegistry $doctrine): RedirectResponse
     {
     // On récupère la todo

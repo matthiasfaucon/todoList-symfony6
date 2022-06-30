@@ -16,9 +16,6 @@ class Todos
     #[ORM\Column(type: 'string', length: 200)]
     private $todoName;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $todoContent;
-
     #[ORM\Column(type: 'boolean')]
     private $isCheckedTodo;
 
@@ -35,18 +32,6 @@ class Todos
     public function setTodoName(string $todoName): self
     {
         $this->todoName = $todoName;
-
-        return $this;
-    }
-
-    public function getTodoContent(): ?string
-    {
-        return $this->todoContent;
-    }
-
-    public function setTodoContent(string $todoContent): self
-    {
-        $this->todoContent = $todoContent;
 
         return $this;
     }
